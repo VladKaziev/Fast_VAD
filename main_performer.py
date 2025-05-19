@@ -14,7 +14,7 @@ from losses import LossComputer # Используем существующий 
 from test import test # Используем существующий test.py
 from models.wsad_performer import WSADPerformer # Импортируем новую модель
 
-from dataset_loader import XDVideo # Используем существующий dataset_loader
+from dataset_loader import Video_dataset # Используем существующий dataset_loader
 from tqdm import tqdm
 
 localtime = time.localtime()
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     net = net.cuda()
 
     # Загрузка данных (аналогично main.py)
-    normal_dataset = XDVideo(root_dir=args.root_dir, list_file_name=args.list_file_train, mode='Train',
+    normal_dataset = Video_dataset(root_dir=args.root_dir, list_file_name=args.list_file_train, mode='Train',
                              num_segments=args.num_segments, len_feature=args.len_feature, is_normal_filter=True, seed=args.seed)
     if len(normal_dataset) == 0:
         actual_train_list_path = os.path.join('list', args.list_file_train) # Упрощено для единообразия
@@ -70,7 +70,7 @@ if __name__ == "__main__":
         print(f"Error: normal_train_loader is empty (0 batches). Samples: {len(normal_dataset)}, batch_size: {args.batch_size}. Adjust batch_size or add samples.")
         exit(1)
 
-    abnormal_dataset = XDVideo(root_dir=args.root_dir, list_file_name=args.list_file_train, mode='Train',
+    abnormal_dataset = Video_dataset(root_dir=args.root_dir, list_file_name=args.list_file_train, mode='Train',
                                num_segments=args.num_segments, len_feature=args.len_feature, is_normal_filter=False, seed=args.seed)
     if len(abnormal_dataset) == 0:
         actual_train_list_path = os.path.join('list', args.list_file_train)
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         print(f"Error: abnormal_train_loader is empty (0 batches). Samples: {len(abnormal_dataset)}, batch_size: {args.batch_size}. Adjust batch_size or add samples.")
         exit(1)
         
-    test_dataset = XDVideo(root_dir=args.root_dir, list_file_name=args.list_file_test, mode='Test',
+    test_dataset = Video_dataset(root_dir=args.root_dir, list_file_name=args.list_file_test, mode='Test',
                            num_segments=args.num_segments, len_feature=args.len_feature, seed=args.seed)
     if len(test_dataset) == 0:
         actual_test_list_path = os.path.join('list', args.list_file_test)

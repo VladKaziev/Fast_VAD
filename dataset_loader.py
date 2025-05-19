@@ -4,7 +4,7 @@ import os
 import numpy as np
 import utils 
 
-class XDVideo(data.DataLoader):
+class Video_dataset(data.DataLoader):
     def __init__(self, root_dir, list_file_name, mode, num_segments, len_feature, seed=-1, is_normal_filter=None):
         if seed >= 0:
             utils.set_seed(seed)
