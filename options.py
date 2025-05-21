@@ -10,7 +10,6 @@ def parse_args():
     parser.add_argument('--log_path', type = str, default = 'logs/')
     parser.add_argument('--model_path', type = str, default = 'ckpts/')
 
-    # Аргументы для файлов списков данных
     parser.add_argument('--list_file_train', type=str, default='ANOM_Train.list', help='List file for training videos (mixed normal/abnormal)')
     parser.add_argument('--list_file_test', type=str, default='ANOM_Test.list', help='List file for test videos (mixed normal/abnormal)')
     
